@@ -259,6 +259,8 @@ function getUserByName(name) {
             return clients[client];
         }
     }
+
+	return undefined;
 }
 
 function updateBar(icon, placeholder, disable) {
@@ -284,13 +286,18 @@ function showChat(type, user, message, subtxt, mid) {
     }
 
     if(type == 'emote' || type == 'message') {
-        if(user == username && getUserByName(user).role == 0) {
-            nameclass = 'self';
-        } else {
-            if(getUserByName(user).role == 1) nameclass = 'helper';
-            if(getUserByName(user).role == 2) nameclass = 'moderator';
-            if(getUserByName(user).role == 3) nameclass = 'administrator';
-        }
+
+	    if (getUserByName(user) != undefined)
+	    {
+        	if(user == username && getUserByName(user).role == 0) {
+            		nameclass = 'self';
+        	} else {
+            		if(getUserByName(user).role == 1) nameclass = 'helper';
+            		if(getUserByName(user).role == 2) nameclass = 'moderator';
+            		if(getUserByName(user).role == 3) nameclass = 'administrator';
+        	}
+	    }
+
     }
 
     if(!subtxt) {

@@ -91,6 +91,14 @@ chat.on('connection', function(conn) {
         }
     }
 
+    if (fs.existsSync("history.json"))
+    {
+        var dataObj = JSON.parse(fs.readFileSync('history.json', 'utf8'));
+
+        for(i in dataObj.history)
+            conn.write(JSON.stringify(dataObj.history[i]));
+    }
+    
     conn.write(JSON.stringify({type:'server', info:'clients', clients:users}));
     conn.write(JSON.stringify({type:'server', info:'user', client:users[uid]}));
     conn.on('data', function(message) {
@@ -312,6 +320,7 @@ function handleSocket(user, message) {
             break;
 
         default:
+            utils.appendHistory(data);
             utils.sendToAll(clients, data);
             break;
     }
