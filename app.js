@@ -321,6 +321,7 @@ function handleSocket(user, message) {
 
         default:
             utils.appendHistory(data);
+            data.type = "message";
             utils.sendToAll(clients, data);
             break;
     }

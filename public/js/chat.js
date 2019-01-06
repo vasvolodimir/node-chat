@@ -306,7 +306,9 @@ function showChat(type, user, message, subtxt, mid) {
         $('#panel').append('<div data-mid="' + mid + '" class="' + type + '""><span class="name ' + nameclass + '"><b><a class="namelink" href="javascript:void(0)">' + user + '</a></b></span><span class="timestamp">(' + subtxt + ') ' + getTime() + '</span><span class="msg">' + message + '</span></div>');
     }
     
-    $('#panel').animate({scrollTop: $('#panel').prop('scrollHeight')}, 500);
+    if (type != "history")
+        $('#panel').animate({scrollTop: $('#panel').prop('scrollHeight')}, 500);
+    
     updateStyle();
     nmr++;
     
